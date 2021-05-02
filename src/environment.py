@@ -1,6 +1,6 @@
 #!/usr/share/env python3.8
 
-from src.ant import Ant
+from .ant import Ant
 
 
 class Environment:

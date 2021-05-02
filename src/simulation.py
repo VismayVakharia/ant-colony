@@ -1,20 +1,17 @@
+from pathlib import Path
 from typing import Tuple
-from . import ui, environment
+
 import pyglet
 
+from .environment import Environment
+from .generic_sprite import GenericSprite
+from .ui import BaseWindow
 
-class AntSprite:
-    def __init__(self, ant, batch: pyglet.graphics.Batch = None):
-        self.ant = ant
-        image = pyglet.image.load("ant.png")
-        self.sprite = pyglet.sprite.Sprite(image, batch=batch)
-        self.update()
-
-    def update(self):
-        self.sprite.update(x=self.ant.x, y=self.ant.y, rotation=-self.ant.angle)
+ASSET_DIR = Path(__file__).parent.parent / "assets"
+ASSETS = {"ant": str(ASSET_DIR / "ant")}
 
 
-class Simulation(ui.BaseWindow):
+class Simulation(BaseWindow):
     def __init__(
         self,
         width: int,
@@ -29,12 +26,12 @@ class Simulation(ui.BaseWindow):
             recording_abspath=recording_abspath,
         )
 
-        self.environment = environment.Environment()
+        self.environment = Environment()
 
         self.batch = pyglet.graphics.Batch()
         self.ant_sprites = []
         for ant in self.environment.ants:
-            self.ant_sprites.append(AntSprite(ant, batch=self.batch))
+            self.ant_sprites.append(GenericSprite(ant, images_dir=ASSETS["ant"], batch=self.batch))
 
     def actual_draw(self):
         self.batch.draw()

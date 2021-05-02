@@ -41,7 +41,8 @@ class BaseWindow(pyglet.window.Window):
             self.record()
 
     def record(self):
-        pyglet.image.get_buffer_manager().get_color_buffer().save(self.recording_path / f"{self.frame_count}.png")
+        file_path = str(self.recording_path / f"{self.frame_count}.png")
+        pyglet.image.get_buffer_manager().get_color_buffer().save(file_path)
         self.frame_count += 1
 
     def on_key_release(self, symbol, modifiers):
