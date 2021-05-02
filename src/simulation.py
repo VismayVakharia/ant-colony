@@ -7,6 +7,7 @@ from .environment import Environment
 from .generic_sprite import GenericSprite
 from .ui import BaseWindow
 
+
 ASSET_DIR = Path(__file__).parent.parent / "assets"
 ASSETS = {"ant": str(ASSET_DIR / "ant")}
 

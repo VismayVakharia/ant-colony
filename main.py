@@ -13,6 +13,7 @@ if __name__ == "__main__":
         width=WIDTH,
         height=HEIGHT,
         bg_color=WHITE_COLOR,
+        # recording_abspath="/home/vismay/projects/ant_colony/frames/01052021/",
         recording_abspath="",
     )
     sim.run()
