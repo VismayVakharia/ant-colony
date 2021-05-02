@@ -12,6 +12,6 @@ class Ant(PhysicalObject):
     def speed(self) -> float:
         return self._speed
 
-    def update(self):
-        self._angle += np.random.normal(0, 1)
-        self._position += self.direction * self._speed
+    def update(self, dt):
+        self._angle += np.random.normal(0, 5)
+        self._position += self.direction * self._speed * dt

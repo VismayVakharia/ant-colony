@@ -27,17 +27,19 @@ class Simulation(BaseWindow):
             recording_abspath=recording_abspath,
         )
 
-        self.environment = Environment()
+        self.environment = Environment(width, height)
 
         self.batch = pyglet.graphics.Batch()
         self.ant_sprites = []
         for ant in self.environment.ants:
-            self.ant_sprites.append(GenericSprite(ant, images_dir=ASSETS["ant"], batch=self.batch))
+            self.ant_sprites.append(
+                GenericSprite(ant, images_dir=ASSETS["ant"], scale=0.5, anchor=(75, 75), batch=self.batch)
+            )
 
     def actual_draw(self):
         self.batch.draw()
 
     def actual_update(self, dt):
-        self.environment.update()
+        self.environment.update(dt)
         for sprite in self.ant_sprites:
             sprite.update()
