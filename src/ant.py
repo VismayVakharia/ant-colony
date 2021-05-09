@@ -1,6 +1,6 @@
 import numpy as np
-from .pheromone import Pheromone, PheromoneType
 
+from .pheromone import Pheromone, PheromoneType
 from .physical_object import PhysicalObject
 
 
@@ -13,13 +13,12 @@ class Ant(PhysicalObject):
         self._time_since_last_drop: float = 0
 
     def drop_pheromone(self, dt: float):
-        if self._time_since_last_drop + dt > self._pheromone_drop_delay:
+        self._time_since_last_drop += dt
+        if self._time_since_last_drop > self._pheromone_drop_delay:
             self._time_since_last_drop = 0
             pheromone_type = PheromoneType.FOOD if self._carrying_food else PheromoneType.HOME
             return Pheromone(pheromone_type, self.x, self.y)
-        else:
-            self._time_since_last_drop += dt
-            return None
+        return None
 
     @property
     def speed(self) -> float:
