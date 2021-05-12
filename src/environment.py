@@ -11,7 +11,7 @@ class Environment:
         self.width = width
         self.height = height
         self.ants = []
-        for i in range(num_ants):
+        for _ in range(num_ants):
             self.ants.append(Ant(x=self.width / 2, y=self.height / 2, angle=np.random.randint(-180, 180), speed=50.0))
 
     def enforce_bounds(self, obj: PhysicalObject):

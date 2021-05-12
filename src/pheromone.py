@@ -1,5 +1,5 @@
-from enum import IntEnum
 from dataclasses import dataclass
+from enum import IntEnum
 
 
 class PheromoneType(IntEnum):

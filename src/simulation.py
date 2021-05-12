@@ -7,12 +7,11 @@ from .environment import Environment
 from .generic_sprite import GenericSprite
 from .ui import BaseWindow
 
-
 ASSET_DIR = Path(__file__).parent.parent / "assets"
 ASSETS = {"ant": str(ASSET_DIR / "ant")}
 
 
-class Simulation(BaseWindow):
+class Simulation(BaseWindow):  # pylint: disable=too-many-ancestors, abstract-method
     def __init__(
         self,
         width: int,
@@ -42,4 +41,4 @@ class Simulation(BaseWindow):
     def actual_update(self, dt):
         self.environment.update(dt)
         for sprite in self.ant_sprites:
-            sprite.update()
+            sprite.render()
