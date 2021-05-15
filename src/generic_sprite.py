@@ -20,9 +20,9 @@ class GenericSprite(pyglet.sprite.Sprite):
         animation = self.load_animation(images_dir, anchor)
         super().__init__(animation, x=obj.x, y=obj.y, batch=batch, group=group)
         self.scale = scale
-        self.render()
+        self.refresh()
 
-    def render(self):
+    def refresh(self):
         super().update(x=self._obj.x, y=self._obj.y, rotation=-self._obj.angle)
 
     @staticmethod

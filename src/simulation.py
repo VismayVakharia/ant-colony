@@ -4,6 +4,7 @@ from typing import Tuple
 import pyglet
 
 from .environment import Environment
+from .generic_shape import GenericShape
 from .generic_sprite import GenericSprite
 from .ui import BaseWindow
 
@@ -35,10 +36,14 @@ class Simulation(BaseWindow):  # pylint: disable=too-many-ancestors, abstract-me
                 GenericSprite(ant, images_dir=ASSETS["ant"], scale=0.5, anchor=(75, 75), batch=self.batch)
             )
 
+        self.food_sprites = []
+        for food_particle in self.environment.food_particles:
+            self.food_sprites.append(GenericShape(food_particle, "circle", radius=2, batch=self.batch))
+
     def actual_draw(self):
         self.batch.draw()
 
     def actual_update(self, dt):
         self.environment.update(dt)
-        for sprite in self.ant_sprites:
-            sprite.render()
+        for sprite in self.ant_sprites + self.food_sprites:
+            sprite.refresh()
