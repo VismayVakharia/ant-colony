@@ -15,7 +15,7 @@ class BaseWindow(pyglet.window.Window):
     ):
 
         config = pyglet.gl.Config(sample_buffers=1, samples=4)
-        super(BaseWindow, self).__init__(width, height, config=config)
+        super().__init__(width, height, config=config)
         gl.glClearColor(*bg_color)
 
         self.is_paused = False
