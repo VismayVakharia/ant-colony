@@ -9,7 +9,7 @@ class Ant(PhysicalObject):
         super().__init__(x, y, angle)
         self._speed = speed
         self._carrying_food: bool = False
-        self._pheromone_drop_delay: float = 1
+        self._pheromone_drop_delay: float = 0.2
         self._time_since_last_drop: float = 0
 
     def drop_pheromone(self, dt: float):
@@ -19,6 +19,13 @@ class Ant(PhysicalObject):
             pheromone_type = PheromoneType.FOOD if self._carrying_food else PheromoneType.HOME
             return Pheromone(pheromone_type, self.x, self.y)
         return None
+
+    def set_x(self, x: float):
+        self._position[0] = x
+
+    def set_y(self, y: float):
+        self._position[1] = y
+
 
     @property
     def speed(self) -> float:
