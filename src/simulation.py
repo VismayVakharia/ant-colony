@@ -3,12 +3,12 @@ from typing import Tuple
 
 import pyglet
 
-from .pheromone import PheromoneType
 from .environment import Environment
 from .generic_shape import GenericShape
 from .generic_sprite import GenericSprite
-from .utils import SingleChannelImage, get_image_data
+from .pheromone import PheromoneType
 from .ui import BaseWindow
+from .utils import SingleChannelImage, get_image_data
 
 ASSET_DIR = Path(__file__).parent.parent / "assets"
 ASSETS = {"ant": str(ASSET_DIR / "ant")}

@@ -3,7 +3,7 @@ import pyglet
 
 
 class AnchoredMatrix:
-    def __init__(self, start_row: int, start_col: int, data: np.array):
+    def __init__(self, start_row: int, start_col: int, data: np.ndarray):
         self._start_row = start_row
         self._start_col = start_col
         self._data = data
@@ -18,10 +18,10 @@ class AnchoredMatrix:
 
 
 class SingleChannelImage:
-    def __init__(self, im_data: np.array):
+    def __init__(self, im_data: np.ndarray):
         self._data = im_data
 
-    def get_matrix_data(self, channel: int) -> np.array:
+    def get_matrix_data(self, channel: int) -> np.ndarray:
         assert channel in [0, 1, 2], f"channel {channel} must be 0, 1, 2"
         width, height = self._data.shape
         image = np.zeros((width, height, 3))
@@ -29,12 +29,11 @@ class SingleChannelImage:
         return image
 
 
-def get_image_data(image: np.array) -> pyglet.image.ImageData:
+def get_image_data(image: np.ndarray) -> pyglet.image.ImageData:
     height, width, num_channels = image.shape
     number_of_bytes = height * width * num_channels
     image *= 255
     image = image.ravel()
-    image_texture = (pyglet.gl.GLubyte * number_of_bytes)(*image.astype('uint8'))
+    image_texture = (pyglet.gl.GLubyte * number_of_bytes)(*image.astype("uint8"))
 
-    return pyglet.image.ImageData(width, height, 'RGB',
-                                  image_texture, pitch=-1 * width * num_channels)
+    return pyglet.image.ImageData(width, height, "RGB", image_texture, pitch=-1 * width * num_channels)

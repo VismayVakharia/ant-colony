@@ -5,9 +5,9 @@ import numpy as np
 
 from .ant import Ant
 from .food import FoodParticle
-from .physical_object import PhysicalObject
 from .pheromone import PheromoneType
 from .pheromone_tracker import SingleTypePheromoneTracker
+from .physical_object import PhysicalObject
 
 
 class Environment:
@@ -15,8 +15,10 @@ class Environment:
         self.width = width
         self.height = height
 
-        self.pheromone_trackers = {pheromone_type: SingleTypePheromoneTracker(width, height, pheromone_type)
-                                   for pheromone_type in PheromoneType}
+        self.pheromone_trackers = {
+            pheromone_type: SingleTypePheromoneTracker(width, height, pheromone_type)
+            for pheromone_type in PheromoneType
+        }
 
         self.food_particles = []
         for _ in range(num_food_particles):
@@ -31,13 +33,13 @@ class Environment:
         y = np.random.randint(0, self.height)
         return x, y
 
-    def enforce_bounds(self, obj: Ant):
+    def enforce_bounds(self, obj: PhysicalObject):
         if not (0 < obj.x < self.width - 1):
             obj.angle = 180 - obj.angle
-            obj.set_x(0 if obj.x < 0 else self.width - 1)
+            obj.x = 0 if obj.x < 0 else self.width - 1
         elif not (0 < obj.y < self.height - 1):
             obj.angle = -obj.angle
-            obj.set_y(0 if obj.y < 0 else self.height - 1)
+            obj.y = 0 if obj.y < 0 else self.height - 1
 
     def update(self, dt):
         for ant in self.ants:

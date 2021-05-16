@@ -20,13 +20,6 @@ class Ant(PhysicalObject):
             return Pheromone(pheromone_type, self.x, self.y)
         return None
 
-    def set_x(self, x: float):
-        self._position[0] = x
-
-    def set_y(self, y: float):
-        self._position[1] = y
-
-
     @property
     def speed(self) -> float:
         return self._speed

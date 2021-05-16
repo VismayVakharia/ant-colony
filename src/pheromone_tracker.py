@@ -15,7 +15,7 @@ class SingleTypePheromoneTracker:
         self._pheromone_type = pheromone_type
         self._tracker = np.zeros((height, width))
 
-    def get_data(self):
+    def get_data(self) -> np.ndarray:
         return self._tracker
 
     def add_pheromone(self, pheromone: Pheromone):
@@ -27,11 +27,11 @@ class SingleTypePheromoneTracker:
         for pheromone in pheromones:
             self.add_pheromone(pheromone)
 
-    def get_point_intensity(self, x: int, y: int):
+    def get_point_intensity(self, x: int, y: int) -> float:
         return self._tracker[y, x]
 
-    def get_intensity(self, mask: np.array):
+    def get_intensity(self, mask: np.ndarray) -> np.ndarray:
         return np.matmul(self._tracker, mask)
 
-    def update(self):
-        ...
+    # def update(self):
+    #     ...

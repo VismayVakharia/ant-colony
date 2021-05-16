@@ -14,9 +14,17 @@ class PhysicalObject:
     def x(self) -> float:
         return self._position[0]
 
+    @x.setter
+    def x(self, value: float):
+        self._position[0] = value
+
     @property
     def y(self) -> float:
         return self._position[1]
+
+    @y.setter
+    def y(self, value: float):
+        self._position[1] = value
 
     @property
     def angle(self) -> float:
