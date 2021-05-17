@@ -28,6 +28,7 @@ class Simulation(BaseWindow):  # pylint: disable=too-many-ancestors, abstract-me
             bg_color=bg_color,
             recording_abspath=recording_abspath,
         )
+        self.fps = pyglet.window.FPSDisplay(self)
 
         self.environment = Environment(width, height)
 
@@ -55,6 +56,7 @@ class Simulation(BaseWindow):  # pylint: disable=too-many-ancestors, abstract-me
         if self.pheromone_map:
             self.pheromone_map.blit(0, 0)
         self.batch.draw()
+        self.fps.draw()
 
     def actual_update(self, dt):
         self.environment.update(dt)
