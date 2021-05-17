@@ -34,10 +34,10 @@ class Environment:
         return x, y
 
     def enforce_bounds(self, obj: PhysicalObject):
-        if not (0 < obj.x < self.width - 1):
+        if not (0 <= obj.x <= self.width - 1):
             obj.angle = 180 - obj.angle
             obj.x = 0 if obj.x < 0 else self.width - 1
-        elif not (0 < obj.y < self.height - 1):
+        elif not (0 <= obj.y <= self.height - 1):
             obj.angle = -obj.angle
             obj.y = 0 if obj.y < 0 else self.height - 1
 

@@ -25,14 +25,18 @@ class SingleChannelImage:
         assert channel in [0, 1, 2], f"channel {channel} must be 0, 1, 2"
         width, height = self._data.shape
         image = np.zeros((width, height, 3))
-        image[:, :, channel] = self._data
+        max_data = np.max(self._data)
+        if max_data > 0:
+            data = 255 * self._data / max_data
+        else:
+            data = self._data
+        image[:, :, channel] = data
         return image
 
 
 def get_image_data(image: np.ndarray) -> pyglet.image.ImageData:
     height, width, num_channels = image.shape
     number_of_bytes = height * width * num_channels
-    image *= 255
     image = image.ravel()
     image_texture = (pyglet.gl.GLubyte * number_of_bytes)(*image.astype("uint8"))
 

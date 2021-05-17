@@ -21,14 +21,14 @@ class SingleTypePheromoneTracker:
     def add_pheromone(self, pheromone: Pheromone):
         x = int(pheromone.x)
         y = int(pheromone.y)
-        self._tracker[y, x] += PHEROMONE_INTENSITY
+        self._tracker[self._height - y - 1, x] += PHEROMONE_INTENSITY
 
     def add_pheromones(self, pheromones: List[Pheromone]):
         for pheromone in pheromones:
             self.add_pheromone(pheromone)
 
     def get_point_intensity(self, x: int, y: int) -> float:
-        return self._tracker[y, x]
+        return self._tracker[self._height - y - 1, x]
 
     def get_intensity(self, mask: np.ndarray) -> np.ndarray:
         return np.matmul(self._tracker, mask)

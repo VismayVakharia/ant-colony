@@ -32,18 +32,24 @@ class Simulation(BaseWindow):  # pylint: disable=too-many-ancestors, abstract-me
         self.environment = Environment(width, height)
 
         self.batch = pyglet.graphics.Batch()
+        self.back_ground = pyglet.graphics.OrderedGroup(0)
+        self.fore_ground = pyglet.graphics.OrderedGroup(1)
 
         self.pheromone_map = None
 
         self.ant_sprites = []
         for ant in self.environment.ants:
             self.ant_sprites.append(
-                GenericSprite(ant, images_dir=ASSETS["ant"], scale=0.5, anchor=(75, 75), batch=self.batch)
+                GenericSprite(
+                    ant, images_dir=ASSETS["ant"], scale=0.5, anchor=(75, 75), batch=self.batch, group=self.fore_ground
+                )
             )
 
         self.food_sprites = []
         for food_particle in self.environment.food_particles:
-            self.food_sprites.append(GenericShape(food_particle, "circle", radius=2, batch=self.batch))
+            self.food_sprites.append(
+                GenericShape(food_particle, "circle", radius=2, batch=self.batch, group=self.fore_ground)
+            )
 
     def actual_draw(self):
         if self.pheromone_map:
